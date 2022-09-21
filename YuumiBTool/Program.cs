@@ -52,18 +52,24 @@ license:Mit");
 
         public void StringTablePacking()
         {
-            string resourceDb = "resource.db";
-            if (!File.Exists(resourceDb) || !File.Exists("./Edit_StringTable.xml")) {
+            string resourceDb = "./resource.db";
+            byte[] stringTable = File.ReadAllBytes("./Edit_StringTable.xml");
+            if (!File.Exists(resourceDb) || !File.Exists("./Edit_StringTable.xml"))
+            {
                 Console.WriteLine("Error resource.db or StringTable.xml not found");
                 return;
             }
-            byte[] stringTable = File.ReadAllBytes("./Edit_StringTable.xml");
-            CompoundFile cf = new CompoundFile(resourceDb,CFSUpdateMode.Update,CFSConfiguration.EraseFreeSectors | CFSConfiguration.SectorRecycle);
-            CFStorage foundStream = cf.RootStorage;
-            foundStream.Delete("StringTable.xml");
-            foundStream.AddStream("StringTable.xml").SetData(stringTable);
-            cf.Save(resourceDb);
-            cf.Close();
+            using (var fs = new FileStream(resourceDb,
+               FileMode.Open,
+               FileAccess.ReadWrite)) {
+                using (var cf = new CompoundFile(fs,   CFSUpdateMode.Update,CFSConfiguration.SectorRecycle | CFSConfiguration.EraseFreeSectors))
+                {
+                    CFStorage foundStream = cf.RootStorage;
+                    foundStream.Delete("StringTable.xml");
+                    foundStream.AddStream("StringTable.xml").SetData(stringTable);
+                    cf.Commit(true);
+                }
+             }
             Console.WriteLine("Packing:  Edit_StringTable.xml -> resource.db ");
             Console.WriteLine("Success!");
         }

@@ -3,7 +3,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <ApplicationIcon>/home/mercy/RiderProjects/YuumiBTool/YuumiBTool/Implant.ico</ApplicationIcon>
+        <ApplicationIcon>Implant.ico</ApplicationIcon>
     </PropertyGroup>
 
 </Project>

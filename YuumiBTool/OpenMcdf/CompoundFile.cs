@@ -1870,7 +1870,7 @@ namespace OpenMcdf
 
             try
             {
-                fs = new FileStream(fileName, FileMode.Create);
+                fs = new FileStream(fileName, FileMode.OpenOrCreate,FileAccess.Write);
                 Save(fs);
             }
             catch (Exception ex)
