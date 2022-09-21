@@ -53,12 +53,14 @@ license:Mit");
         public void StringTablePacking()
         {
             string resourceDb = "./resource.db";
-            byte[] stringTable = File.ReadAllBytes("./Edit_StringTable.xml");
             if (!File.Exists(resourceDb) || !File.Exists("./Edit_StringTable.xml"))
             {
                 Console.WriteLine("Error resource.db or StringTable.xml not found");
                 return;
             }
+          
+            byte[] stringTable = File.ReadAllBytes("./Edit_StringTable.xml");
+
             using (var fs = new FileStream(resourceDb,
                FileMode.Open,
                FileAccess.ReadWrite)) {
