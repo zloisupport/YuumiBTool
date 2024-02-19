@@ -8,6 +8,7 @@ namespace YuumiBTool
     internal class DuiSkinBuilder
     {
         private string dir = Path.Combine(Directory.GetCurrentDirectory(), "default");
+
         public void Extract()
         {
             ExtractDefaultArchive();
@@ -16,7 +17,7 @@ namespace YuumiBTool
         private void ExtractDefaultArchive()
         {
             var defaultArchive = Path.Combine(Directory.GetCurrentDirectory(), "default.db");
-            if (Directory.Exists(defaultArchive))
+            if (!Directory.Exists(defaultArchive))
             {
                 Console.WriteLine($"Missing file:{defaultArchive}");
                 return;
