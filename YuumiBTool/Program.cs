@@ -22,9 +22,9 @@ date: 07-11-24
 license:MIT");
             Console.ResetColor();
             Console.WriteLine("Command:\n" +
-                "ru : -unpacking StringTable.xml\n" +
+                "ru : -unpacking Resource.db\n" +
                 "rp : -pack Resource.db\n" +
-                "du : -unpacking \n" +
+                "du : -unpacking default.db\n" +
                 "dp : -pack default folder\n" +
                 "c  : -console Clear\n" +
                 "q  : -quit\n");
