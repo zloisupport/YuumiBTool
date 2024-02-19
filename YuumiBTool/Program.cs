@@ -9,35 +9,46 @@ namespace YuumiBTool
 
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(@"
   __  __                _ ___ ______          __
  \ \/ /_ ____ ____ _  (_) _ )_  __/__  ___  / /
   \  / // / // /  ' \/ / _  |/ / / _ \/ _ \/ / 
   /_/\_,_/\_,_/_/_/_/_/____//_/  \___/\___/_/     CLI
  
-                v 1.0.0.a
+                v 1.0.1.a
 Author:zlo1supp0rt@gmail.com 
-date: 07-11-21 
-license:Mit");
+date: 07-11-24 
+license:MIT");
+            Console.ResetColor();
             Console.WriteLine("Command:\n" +
-                "u : -unpacking StringTable.xml\n" +
-                "p : -pack Resource.db\n" +
-                "c : -console Clear\n"+
-                "q : -quit\n");
+                "ru : -unpacking StringTable.xml\n" +
+                "rp : -pack Resource.db\n" +
+                "du : -unpacking \n" +
+                "dp : -pack default folder\n" +
+                "c  : -console Clear\n" +
+                "q  : -quit\n");
             while (true)
             {       
-              
-                Console.WriteLine("Enter command: u, p, c, q" );  
+                Console.WriteLine("Enter command: ru, rp, du, dp, c , q");  
                 
                 var inputCommand = Console.ReadLine();
                 Program program = new Program();
-                switch (@inputCommand)
+                var duiSkinBuilder = new DuiSkinBuilder();
+
+                switch (@inputCommand.ToLower())
                 {
-                    case "u":
+                    case "ru":
                        program.StringTableExtract();
                         break;
-                    case "p":
+                    case "rp":
                         program.StringTablePacking();
+                        break;
+                    case "du":
+                        
+                        break;                  
+                    case "dp":
+                        duiSkinBuilder.Build();
                         break;
                     case "c":
                         Console.Clear();
