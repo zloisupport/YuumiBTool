@@ -45,7 +45,7 @@ license:MIT");
                         program.StringTablePacking();
                         break;
                     case "du":
-                        
+                        duiSkinBuilder.Extract();
                         break;                  
                     case "dp":
                         duiSkinBuilder.Build();
