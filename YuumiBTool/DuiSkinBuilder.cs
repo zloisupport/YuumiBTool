@@ -1,16 +1,47 @@
 ﻿using OpenMcdf;
 using System.IO;
 using System;
+using SevenZipExtractor;
 
 namespace YuumiBTool
 {
     internal class DuiSkinBuilder
-    {   
-        
+    {
+        private string dir = Path.Combine(Directory.GetCurrentDirectory(), "default");
+        public void Extract()
+        {
+            ExtractDefaultArchive();
+        }
+
+        private void ExtractDefaultArchive()
+        {
+            var defaultArchive = Path.Combine(Directory.GetCurrentDirectory(), "default.db");
+            if (Directory.Exists(defaultArchive))
+            {
+                Console.WriteLine($"Missing file:{defaultArchive}");
+                return;
+            }
+
+            Directory.CreateDirectory(dir);
+
+            using (FileStream fs = new FileStream(defaultArchive, FileMode.Open))
+            {
+                using (ArchiveFile archiveFile = new ArchiveFile(fs, SevenZipFormat.Compound))
+                {
+                    archiveFile.Extract(dir, true);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("The default.db file has been successfully extracted!");
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.WriteLine($"Locate: {dir}");
+                    Console.ResetColor();
+                }
+            }
+
+        }
 
         public void Build()
         {
-            string dir = Path.Combine(Directory.GetCurrentDirectory(),"default");
+
             if (!Directory.Exists(dir))
             {
 
@@ -42,7 +73,7 @@ namespace YuumiBTool
 
             foreach (var subdir in directoryInfo.GetDirectories())
             {
-                 AddSubStorage(root, subdir);
+                AddSubStorage(root, subdir);
             }
 
         }
