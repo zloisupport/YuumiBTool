@@ -1,13 +1,11 @@
 ﻿using System;
-using System.IO;
-using OpenMcdf;
 
 namespace YuumiBTool
 {
-    class Program :IAction
+    class Program 
     {
 
-        static void Main(string[] args)
+        static void Main()
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(@"
@@ -18,7 +16,7 @@ namespace YuumiBTool
  
                 v 1.0.1.a
 Author:zlo1supp0rt@gmail.com 
-date: 07-11-24 
+date: 20-02-24 
 license:MIT");
             Console.ResetColor();
             Console.WriteLine("Command:\n" +
@@ -60,7 +58,5 @@ license:MIT");
                
             }
         }
-
-
     }
 }
