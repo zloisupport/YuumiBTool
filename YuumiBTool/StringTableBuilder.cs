@@ -21,13 +21,13 @@ namespace YuumiBTool
         private void StringTablePacking()
         {
             string resourceDb = "./resource.db";
-            if (!File.Exists(resourceDb) || !File.Exists("./Edit_StringTable.xml"))
+            if (!File.Exists(resourceDb) || !File.Exists("StringTable.xml"))
             {
                 Console.WriteLine("Error resource.db or StringTable.xml not found");
                 return;
             }
 
-            byte[] stringTable = File.ReadAllBytes("./Edit_StringTable.xml");
+            byte[] stringTable = File.ReadAllBytes("StringTable.xml");
 
             using (var fs = new FileStream(resourceDb,
                FileMode.Open,
@@ -41,7 +41,7 @@ namespace YuumiBTool
                     cf.Commit(true);
                 }
             }
-            Console.WriteLine("Packing:  Edit_StringTable.xml -> resource.db ");
+            Console.WriteLine("Compressing:  StringTable.xml -> resource.db ");
             Console.WriteLine("Success!");
         }
 
@@ -59,8 +59,7 @@ namespace YuumiBTool
             CFStream foundStream = cf.RootStorage.GetStream("StringTable.xml");
             byte[] stringTable = foundStream.GetData();
             cf.Close();
-            ByteArrayToFile("Unpacked_StringTable.xml", stringTable);
-            File.Copy("./Unpacked_StringTable.xml", "./Edit_StringTable.xml", true);
+            ByteArrayToFile("StringTable.xml", stringTable);
         }
 
         private static bool ByteArrayToFile(string fileName, byte[] byteArray)
@@ -69,7 +68,8 @@ namespace YuumiBTool
             {
                 using var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
                 fs.Write(byteArray, 0, byteArray.Length);
-                Console.WriteLine("StringTable.xml unpacked! -> Unpacking_StringTable.xml->Edit_StringTable.xml");
+                Console.WriteLine("Extract: resource.db -> StringTable.xml");
+                Console.WriteLine("Success!");
                 return true;
             }
             catch (Exception ex)
