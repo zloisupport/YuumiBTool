@@ -17,7 +17,7 @@ namespace YuumiBTool
         private void ExtractDefaultArchive()
         {
             var defaultArchive = Path.Combine(Directory.GetCurrentDirectory(), "default.db");
-            if (!Directory.Exists(defaultArchive))
+            if (!File.Exists(defaultArchive))
             {
                 Console.WriteLine($"Missing file:{defaultArchive}");
                 return;
